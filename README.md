@@ -1,3 +1,46 @@
+# elasticsearch-plugin 수정 사항
+## 1. 개요
+- 엘라스틱서치 버전에 따라 플러그인 버전이 일치되야 한다.
+- 엘라스틱서치 버전 변경 : 6.4.3 -> 7.5.0
+
+## 2. 수정 사항
+- 엘라스틱서치 버전
+- 루씬 버전
+  - 루씬 버전은 엘라스틱서치 버전에 의존적이다. 
+  - 엘라스틱서치 버전에 따라 루씬 버전을 찾아야하는 경우 [ElasticSearch 7.5.0 dependencies](https://artifacts.elastic.co/reports/dependencies/dependencies-7.5.0.html) 에서 찾는다.
+    - https://artifacts.elastic.co/reports/dependencies/dependencies-7.5.0.html
+- 메이븐 리파지토리 추가
+  - Restlet Core API and Engine » 2.3.0 가 Maven Central Repository 없어서 추가함.
+
+pom.xml
+```
+    <properties>
+        <elasticsearch.version>7.5.0</elasticsearch.version>
+        <lucene.version>8.3.0</lucene.version>
+    </properties>
+    
+    <repositories>
+        <repository>
+            <id>central</id>
+            <url>https://repo1.maven.org/maven2/</url>
+        </repository>
+        <repository>
+            <id>maven-restlet</id>
+            <name>Restlet repository</name>
+            <url>https://maven.restlet.talend.com</url>
+        </repository>
+    </repositories>
+```
+
+
+## 2. build
+```
+$ mvn clean package assembly:single
+```
+
+
+
+---
 # elasticsearch-plugin
 자바카페 Elasticsearch 플러그인
 
